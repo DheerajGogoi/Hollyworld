@@ -1,11 +1,12 @@
 import './Home.scss'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Box, Container, Grid, GridItem, SimpleGrid, Spinner, Text, useMediaQuery } from '@chakra-ui/react';
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import Header from '../../components/Header';
 import MovieCard from '../../components/MovieCard';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import useFetchTrending from '../../hooks/useFetchTrending';
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(false);
@@ -16,31 +17,31 @@ export default function Home() {
     const [isLessThan490] = useMediaQuery('(max-width: 490px)');
 
     const history = useHistory();
+    const { loading, error, list } = useFetchTrending(page);
+    const loader = useRef(null);
+
+    const handleObserver = useCallback((entries) => {
+        const target = entries[0];
+        if (target.isIntersecting) {
+            setPage((prev) => prev + 1);
+        }
+    }, []);
 
     useEffect(() => {
-        const fetch = () => {
-            setIsLoading(true);
-            axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`)
-            .then((result) => {
-                result = result.data;
-                console.log(result);
-                setTrendingMovies(result);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            })
-        }
-        fetch()
-    }, []);
+        const option = {
+            root: null,
+            rootMargin: "20px",
+            threshold: 0
+        };
+        const observer = new IntersectionObserver(handleObserver, option);
+        if (loader.current) observer.observe(loader.current);
+    }, [handleObserver]);
 
     if(isLoading) return <Spinner
         thickness='4px'
         speed='0.65s'
         emptyColor='gray.200'
-        color='blue.500'
+        color='#38B2AC'
         size='xl'
     />
 
@@ -60,10 +61,21 @@ export default function Home() {
                 >
                     <SimpleGrid columns={[2, null, isLessMore840 ? 4 : 3, null, 6]} gap={8}>
                         {
-                            trendingMovies.results && trendingMovies.results.map(movie => <MovieCard movie={movie} />)
+                            list && list.map(movie => <MovieCard movie={movie} />)
                         }
                     </SimpleGrid>
                 </Box>
+
+                {loading && <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    emptyColor='gray.200'
+                    color='#38B2AC'
+                    size='xl'
+                />}
+                {error && <p>Error!</p>}
+                <div ref={loader} />
+
             </Box>
         </Box>
     )
