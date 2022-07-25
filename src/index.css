@@ -1,0 +1,13 @@
+@font-face {
+    font-family: caviar;
+    src: url(./fonts/CaviarDreams-Bold.ttf);
+}
+  
+@font-face {
+  font-family: axiforma;
+  src: url(./fonts/Axiforma-Book.ttf);
+}
+
+body{
+    font-family: 'axiforma', sans-serif;
+}
