@@ -9,5 +9,9 @@
 }
 
 body{
-    font-family: 'axiforma', sans-serif;
+  font-family: 'axiforma', sans-serif;
+}
+
+*{
+  font-family: 'axiforma', sans-serif;
 }
