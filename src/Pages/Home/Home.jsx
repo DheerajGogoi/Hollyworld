@@ -34,7 +34,7 @@ import MovieCard from '../../components/MovieCard';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import useFetchTrending from '../../hooks/useFetchTrending';
-import { poster_url_300 } from '../../Utils';
+import { backdrop_url, poster_url_300 } from '../../Utils';
 import { AiFillYoutube } from "react-icons/ai";
 
 export default function Home() {
@@ -44,8 +44,9 @@ export default function Home() {
     const [trendingMovies, setTrendingMovies] = useState([]);
     const [page, setPage] = useState(1);
 
-    const [isLessMore840] = useMediaQuery('(min-width: 840px)');
+    const [isMoreThan840] = useMediaQuery('(min-width: 840px)');
     const [isLessThan490] = useMediaQuery('(max-width: 490px)');
+    const [isLessThan550] = useMediaQuery('(max-width: 550px)');
 
     const history = useHistory();
     const { loading, error, list } = useFetchTrending(page);
@@ -117,7 +118,7 @@ export default function Home() {
                     className='tending-movies-container'
                     marginTop={5}
                 >
-                    <SimpleGrid columns={[2, null, isLessMore840 ? 4 : 3, null, 6]} gap={8}>
+                    <SimpleGrid columns={[2, null, isMoreThan840 ? 4 : 3, null, 6]} gap={8}>
                         {
                             list && list.map(movie => movie.title && <MovieCard movie={movie} movieOnOpen={movieOnOpen} setCurrentMovie={setCurrentMovie} fetchMovieDetails={fetchMovieDetails} />)
                         }
@@ -153,11 +154,11 @@ export default function Home() {
                             size='xl'
                         />}
                             {!fetchMovieLoading && <Flex
-                                flexDirection='row'
+                                flexDirection={isLessThan550 ? 'column' : 'row'}
                                 gap='5'
                             >
                                 <Box>
-                                    <Image src={`${poster_url_300}${currentMovie?.poster_path}`} />
+                                    <Image src={`${isLessThan550 ? backdrop_url : poster_url_300}${!isLessThan550 ? currentMovie?.poster_path : currentMovie?.backdrop_path}`} />
                                 </Box>
                                 <Box width='100%'>
                                     <Box textAlign='center'>
