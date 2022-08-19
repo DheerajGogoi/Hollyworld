@@ -1,6 +1,6 @@
 exports.poster_url = "https://image.tmdb.org/t/p/w200/";
 
-exports.poster_url_300 = "https://image.tmdb.org/t/p/w300/";
+exports.poster_url_300 = "https://image.tmdb.org/t/p/w400/";
 
 exports.backdrop_url = "https://image.tmdb.org/t/p/w400/";
 

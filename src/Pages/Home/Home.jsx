@@ -32,7 +32,6 @@ import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import Header from '../../components/Header';
 import MovieCard from '../../components/MovieCard';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 import useFetchTrending from '../../hooks/useFetchTrending';
 import { backdrop_url, poster_url_300 } from '../../Utils';
 import { AiFillYoutube } from "react-icons/ai";
@@ -48,7 +47,6 @@ export default function Home() {
     const [isLessThan490] = useMediaQuery('(max-width: 490px)');
     const [isLessThan550] = useMediaQuery('(max-width: 550px)');
 
-    const history = useHistory();
     const { loading, error, list } = useFetchTrending(page);
     const loader = useRef(null);
 

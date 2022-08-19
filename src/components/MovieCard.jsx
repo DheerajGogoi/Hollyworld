@@ -13,7 +13,7 @@ export default function MovieCard({ movie, movieOnOpen, setCurrentMovie, fetchMo
     return (
         <Box width={isLessThan490 ? 160 : 200}  cursor='pointer' _hover={{ opacity: '0.9' }} onClick={movieOnClick}>
             <Image src={movie.poster_path ? `${poster_url}${movie.poster_path}` : img_unavailable} alt='image' borderRadius='md' />
-            <Text textAlign='center' >{movie.title}</Text>
+            <Text textAlign='center' mt='2'>{movie.title}</Text>
         </Box>
     )
 }
