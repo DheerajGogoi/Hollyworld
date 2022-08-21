@@ -142,10 +142,10 @@ export default function TvShows() {
     />
 
     return (
-        <Box textAlign='center'>
+        <Box textAlign='center' overflowX='hidden'>
             <Header />
             <Box
-                className='trending-box'
+                className='tv-box'
                 p={isLessThan490 ? 5 : 8}
                 display='inline-block'
             >

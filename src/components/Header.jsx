@@ -19,7 +19,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 export default function Header() {
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location.pathname);
     return (
         <Box
             bg='#38B2AC'
@@ -51,11 +50,8 @@ export default function Header() {
                         <MenuItem fontWeight={location.pathname === '/tvshows' ? 'bold' : 'normal'} onClick={() => navigate('/tvshows')}>
                             TV Shows
                         </MenuItem>
-                        <MenuItem fontWeight={location.pathname === '/toprated' ? 'bold' : 'normal'}>
-                            Top Rated
-                        </MenuItem>
                         <Divider />
-                        <MenuItem fontWeight={location.pathname === '/search' ? 'bold' : 'normal'}>
+                        <MenuItem fontWeight={location.pathname === '/search' ? 'bold' : 'normal'} onClick={() => navigate('/search')}>
                             Search
                         </MenuItem>
                     </MenuList>

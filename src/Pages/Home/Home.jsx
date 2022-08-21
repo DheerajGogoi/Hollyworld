@@ -103,7 +103,7 @@ export default function Home() {
     />
 
     return (
-        <Box textAlign='center'>
+        <Box textAlign='center' overflowX='hidden'>
             <Header />
             <Box
                 className='trending-box'

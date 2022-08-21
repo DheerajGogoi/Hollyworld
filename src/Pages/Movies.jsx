@@ -142,10 +142,10 @@ export default function Movies() {
     />
 
     return (
-        <Box textAlign='center'>
+        <Box textAlign='center' overflowX='hidden'>
             <Header />
             <Box
-                className='trending-box'
+                className='movie-box'
                 p={isLessThan490 ? 5 : 8}
                 display='inline-block'
             >
