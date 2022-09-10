@@ -49,15 +49,16 @@ export default function TvShows() {
     const [isMoreThan840] = useMediaQuery('(min-width: 840px)');
     const [isLessThan490] = useMediaQuery('(max-width: 490px)');
     const [isLessThan550] = useMediaQuery('(max-width: 550px)');
+    const [isLessThan850] = useMediaQuery('(max-width: 850px)');
 
     const [selectedGenres, setSelectedGenres] = useState([]);
     const genres = useGenre(selectedGenres);
-    console.log(genres)
+    // console.log(genres)
     const [genereList, setGenreList] = useState([]);
     const [changeInGenre, setChangeInGenre] = useState(false);
 
     const { loading, error, list } = useFetchTvShows(page, genres, changeInGenre, setChangeInGenre);
-    console.log('result', list);
+    // console.log('result', list);
     const loader = useRef(null);
 
     const handleObserver = useCallback((entries) => {
@@ -73,7 +74,7 @@ export default function TvShows() {
             .then(result => {
                 result = result.data;
                 setGenreList(result.genres);
-                console.log(result.genres);
+                // console.log(result.genres);
             })
             .catch(error => {
                 console.log(error);
@@ -100,11 +101,11 @@ export default function TvShows() {
         axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
         .then((response) => {
             response = response.data;
-            console.log(response);
+            // console.log(response);
             axios.get(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
                 .then((result) => {
                     result = result.data;
-                    console.log({...response, trailer_videos: result.results});
+                    // console.log({...response, trailer_videos: result.results});
                     setCurrentTv({...response, trailer_videos: result.results});
                 })
                 .catch(err => {
@@ -195,7 +196,7 @@ export default function TvShows() {
                     setCurrentTv(null);
                 }} isOpen={tvIsOpen} isCentered>
                     <ModalOverlay />
-                    <ModalContent maxWidth='none' width='80%'>
+                    <ModalContent maxWidth='none' width='80%' maxHeight={isLessThan850 ? '95%' : 'auto'}>
                         <ModalHeader></ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>

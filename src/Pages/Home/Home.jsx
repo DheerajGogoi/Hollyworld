@@ -46,6 +46,7 @@ export default function Home() {
     const [isMoreThan840] = useMediaQuery('(min-width: 840px)');
     const [isLessThan490] = useMediaQuery('(max-width: 490px)');
     const [isLessThan550] = useMediaQuery('(max-width: 550px)');
+    const [isLessThan850] = useMediaQuery('(max-width: 850px)');
 
     const { loading, error, list } = useFetchTrending(page);
     const loader = useRef(null);
@@ -75,11 +76,11 @@ export default function Home() {
         axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
         .then((response) => {
             response = response.data;
-            console.log(response);
+            // console.log(response);
             axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
                 .then((result) => {
                     result = result.data;
-                    console.log({...response, trailer_videos: result.results});
+                    // console.log({...response, trailer_videos: result.results});
                     setCurrentMovie({...response, trailer_videos: result.results});
                 })
                 .catch(err => {
@@ -140,7 +141,7 @@ export default function Home() {
                     setCurrentMovie(null);
                 }} isOpen={movieIsOpen} isCentered>
                     <ModalOverlay />
-                    <ModalContent maxWidth='none' width='80%'>
+                    <ModalContent maxWidth='none' width='80%' maxHeight={isLessThan850 ? '95%' : 'auto'}>
                         <ModalHeader></ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>

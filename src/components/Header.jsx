@@ -11,10 +11,12 @@ import {
     MenuOptionGroup,
     MenuDivider,
     IconButton,
-    Divider
+    Divider,
+    HStack
 } from '@chakra-ui/react';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FaGithub, FaGlobe } from "react-icons/fa";
 
 export default function Header() {
     const navigate = useNavigate();
@@ -56,6 +58,13 @@ export default function Header() {
                         </MenuItem>
                     </MenuList>
                 </Menu>
+            </Box>
+
+            <Box mt='2'>
+                <HStack justifyContent='center' gap='1'>
+                    <IconButton aria-label='Search database' icon={<FaGithub style={{ fontSize: '1.5rem', color: 'white' }} />} borderRadius='full' background='transparent' _hover={{ background: 'transparent' }} onClick={() => window.open('https://github.com/DheerajGogoi/Movielux.git')} />
+                    <IconButton aria-label='Search database' icon={<FaGlobe style={{ fontSize: '1.5rem', color: 'white' }} />} borderRadius='full' background='transparent' _hover={{ background: 'transparent' }} onClick={() => window.open('https://dheerajgogoi.netlify.app')} />
+                </HStack>
             </Box>
         </Box>
     )

@@ -52,6 +52,7 @@ export default function Search() {
     const [isMoreThan840] = useMediaQuery('(min-width: 840px)');
     const [isLessThan490] = useMediaQuery('(max-width: 490px)');
     const [isLessThan550] = useMediaQuery('(max-width: 550px)');
+    const [isLessThan850] = useMediaQuery('(max-width: 850px)');
 
     const [searchText, setSearchText] = useState("a");
     const [query, setQuery] = useState("");
@@ -92,9 +93,9 @@ export default function Search() {
                 `https://api.themoviedb.org/3/search/${media_type ? media_type : type}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${media_type ? query : searchText}&page=1&include_adult=false`
             )
             .then(response => {
-                console.log(response.config.url);
+                // console.log(response.config.url);
                 response = response.data;
-                console.log('Fetch data', response);
+                // console.log('Fetch data', response);
                 setMediaList(response.results);
             })
             .catch(e => {
@@ -114,7 +115,7 @@ export default function Search() {
             axios.get(`https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
                 .then((result) => {
                     result = result.data;
-                    console.log({...response, trailer_videos: result.results});
+                    // console.log({...response, trailer_videos: result.results});
                     setCurrentMedia({...response, trailer_videos: result.results});
                 })
                 .catch(err => {
@@ -131,7 +132,7 @@ export default function Search() {
 
     const onSearch = (e) => {
         e.preventDefault();
-        console.log(e.target.value);
+        // console.log(e.target.value);
         if(searchText){
             setNewSearch(true);
             fetchMedia(); //take media_type to be the current value of "type"
@@ -239,7 +240,7 @@ export default function Search() {
                     setCurrentMedia(null);
                 }} isOpen={mediaIsOpen} isCentered>
                     <ModalOverlay />
-                    <ModalContent maxWidth='none' width='80%'>
+                    <ModalContent maxWidth='none' width='80%' maxHeight={isLessThan850 ? '95%' : 'auto'} overflowY='scroll'>
                         <ModalHeader></ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
