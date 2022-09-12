@@ -35,6 +35,7 @@ import axios from 'axios';
 import useFetchTrending from '../../hooks/useFetchTrending';
 import { backdrop_url, poster_url_300 } from '../../Utils';
 import { AiFillYoutube } from "react-icons/ai";
+import { FaPlayCircle } from "react-icons/fa";
 
 export default function Home() {
     const { isOpen: movieIsOpen, onOpen: movieOnOpen, onClose: movieOnClose } = useDisclosure()
@@ -104,7 +105,7 @@ export default function Home() {
     />
 
     return (
-        <Box textAlign='center' overflowX='hidden'>
+        <Box textAlign='center' overflowX='hidden' background='#080808' color='white'>
             <Header />
             <Box
                 className='trending-box'

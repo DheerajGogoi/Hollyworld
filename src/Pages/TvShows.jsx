@@ -143,7 +143,7 @@ export default function TvShows() {
     />
 
     return (
-        <Box textAlign='center' overflowX='hidden'>
+        <Box textAlign='center' overflowX='hidden' background='#080808' color='white'>
             <Header />
             <Box
                 className='tv-box'
@@ -152,18 +152,17 @@ export default function TvShows() {
             >
                 <Text fontSize={28} textAlign='left'>Tv Shows</Text>
 
-                <Wrap spacing={2}>
+                <Wrap spacing={4}>
                     {
                         selectedGenres.map((g) => <WrapItem>
-                            <Button colorScheme='facebook' onClick={() => removeGenre(g)} position='relative'>
+                            <Button colorScheme='red' onClick={() => removeGenre(g)} position='relative' fontWeight='normal'>
                                 {g.name}
-                                <Box color='black' borderRadius='full' bg='gray.100' p='5px' position='absolute' top='-5px' right='-5px'><FiMinusCircle fontSize='10px' /></Box>
                             </Button>
                         </WrapItem>)
                     }
                     {
                         genereList.map((g) => <WrapItem>
-                            <Button colorScheme='green' onClick={() => addGenre(g)}>{g.name}</Button>
+                            <Button colorScheme='red' border='0.6px solid red' background='transparent' onClick={() => addGenre(g)} fontWeight='normal'>{g.name}</Button>
                         </WrapItem>)
                     }
                 </Wrap>

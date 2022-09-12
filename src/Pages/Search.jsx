@@ -143,7 +143,7 @@ export default function Search() {
     }
 
     return (
-        <Box overflowX='hidden'>
+        <Box overflowX='hidden' background='#080808' color='white'>
             <Header />
             <Box
                 className='trending-box'
