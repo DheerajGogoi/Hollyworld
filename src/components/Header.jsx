@@ -61,7 +61,7 @@ export default function Header() {
                 </HStack>}
 
                 {!isLessThan730 && <Box border='1px solid white' p='1' borderRadius='10'>
-                    <IconButton aria-label='Search database' icon={<FaGithub style={{ fontSize: '1.5rem', color: 'white' }} />} borderRadius='full' background='transparent' _hover={{ background: 'transparent' }} onClick={() => window.open('https://github.com/DheerajGogoi/Movielux.git')} />
+                    <IconButton aria-label='Search database' icon={<FaGithub style={{ fontSize: '1.5rem', color: 'white' }} />} borderRadius='full' background='transparent' _hover={{ background: 'transparent' }} onClick={() => window.open('https://github.com/DheerajGogoi/Hollyworld.git')} />
                     <IconButton aria-label='Search database' icon={<FaGlobe style={{ fontSize: '1.5rem', color: 'white' }} />} borderRadius='full' background='transparent' _hover={{ background: 'transparent' }} onClick={() => window.open('https://dheerajgogoi.netlify.app')} />
                 </Box>}
 
