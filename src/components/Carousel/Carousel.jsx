@@ -1,5 +1,5 @@
 import './Carousel.scss';
-import { Box, Button, Flex, HStack, Image, Text, useMediaQuery, Link } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Image, Text, Link } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
 import { StarIcon } from '@chakra-ui/icons';
 import { poster_carousel } from '../../Utils';
@@ -8,12 +8,33 @@ import { AiFillYoutube } from "react-icons/ai";
 import black_bg from '../../img/black_bg.png';
 import axios from 'axios';
 
+const releaseDurr = (date) => {
+    const b = new Date();
+    const a = new Date(date);
+    const value = Math.ceil((b-a) / (1000 * 60 * 60 * 24));
+    var release;
+    if(value > 397) {
+        release = Math.round(value/365) + ' years ago';
+    }
+    else if(value > 31) {
+        if(Math.round(value/30) === 1){
+            release = Math.round(value/30) + ' month ago';
+        } else {
+            release = Math.round(value/30) + ' months ago';
+        }
+    } else if(value > 0) {
+        release = value + " days ago";
+    } else {
+        release = 'No released yet'
+    }
+    return release;
+}
+
 export default function Carousel() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     useEffect(() => {
         const fetchData = () => {
-            setLoading(true);
             axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}&page=1`)
             .then((result) => {
                 result = result.data;
@@ -34,7 +55,7 @@ export default function Carousel() {
 
     return (
         <Box>
-            <div id="carouselExampleCaptions" className="carousel slide carousel-container" data-bs-ride="false">
+            <div id="carouselExampleCaptions" className="carousel slide carousel-container" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img src={black_bg} className="d-block w-100 carousel-img" alt="..." style={{
@@ -45,41 +66,41 @@ export default function Carousel() {
                             <Box>
                                 <Flex direction='row' gap='5'>
                                     <Box alignSelf='center'>
-                                        <Text color='#d1d5db'>2 months ago</Text>
+                                        <Text color='#d1d5db'>{!loading && releaseDurr(data?.results[0]?.release_date)}</Text>
                                         <Text mt='6' fontWeight='bolder' fontSize='3rem'>
-                                            {!loading && data && data?.results[0]?.name}
+                                            {!loading && data?.results[0]?.title}
                                         </Text>
                                         <HStack gap='6' mt='6'>
                                             <Text alignSelf='center'>
-                                                <StarIcon color='yellow' mr='2' /> {!loading && data && data?.results[0]?.vote_average}
+                                                <StarIcon color='yellow' mr='2' /> {!loading && data?.results[0]?.vote_average}
                                             </Text>
                                             <Text alignSelf='center' background='white' p='2px' borderRadius='full'></Text>
                                             <Text>
-                                                <RiThumbUpFill color='red' style={{ display: 'inline-block', marginRight: '10px' }} /> {!loading && data && data?.results[0]?.vote_count}
+                                                <RiThumbUpFill color='red' style={{ display: 'inline-block', marginRight: '10px' }} /> {!loading && data?.results[0]?.vote_count}
                                             </Text>
                                             <Text alignSelf='center' background='white' p='2px' borderRadius='full'></Text>
                                             <Text>
-                                                {data?.results[0]?.original_language}
+                                                {!loading && data?.results[0]?.original_language}
                                             </Text>
                                         </HStack>
                                         <Text mt='6'>
-                                            {data?.results[0]?.overview}
+                                            {!loading && data?.results[0]?.overview}
                                         </Text>
 
-                                        <Link href={`https://www.youtube.com/results?search_query=${data?.results[0]?.name}`} isExternal _hover={{ textDecoration: 'none' }}>
+                                        <Link href={`https://www.youtube.com/results?search_query=${data.length > 0 && data?.results[0]?.name}`} isExternal _hover={{ textDecoration: 'none' }}>
                                             <Button colorScheme='red' mt='6'>
                                                 <AiFillYoutube color='white' fontSize='2rem' style={{ marginRight: '10px' }} />Watch Trailer
                                             </Button>
                                         </Link>
                                     </Box>
                                     <Box alignSelf='center'>
-                                        <Image src={poster_carousel + 'iRV0IB5xQeOymuGGUBarTecQVAl.jpg'} alt='Poster image' borderRadius='lg' />
+                                        <Image src={poster_carousel + `${!loading && data?.results[0]?.poster_path}`} alt='Poster image' borderRadius='lg' />
                                     </Box>
                                 </Flex>
                             </Box>
                         </div>
                     </div>
-                    {!loading && data && data?.results?.map((media, index) =>  index !== 0 && <CarouselItem media={media} key={index} />)}
+                    {!loading && data?.results?.map((media, index) =>  index !== 0 && <CarouselItem media={media} key={index} />)}
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -105,33 +126,35 @@ const CarouselItem = ({ media }) => {
                 <Box>
                     <Flex direction='row' gap='5'>
                         <Box alignSelf='center'>
-                            <Text color='#d1d5db'>2 months ago</Text>
-                            <Text mt='6' fontWeight='bolder' fontSize='3rem'>Where the Crawdads Sing</Text>
+                            <Text color='#d1d5db'>{releaseDurr(media.release_date)}</Text>
+                            <Text mt='6' fontWeight='bolder' fontSize='3rem'>
+                                {media.title}
+                            </Text>
                             <HStack gap='6' mt='6'>
                                 <Text alignSelf='center'>
-                                    <StarIcon color='yellow' mr='2' /> 7.6
+                                    <StarIcon color='yellow' mr='2' /> {media.vote_average}
                                 </Text>
                                 <Text alignSelf='center' background='white' p='2px' borderRadius='full'></Text>
                                 <Text>
-                                    <RiThumbUpFill color='red' style={{ display: 'inline-block', marginRight: '10px' }} /> 7.6
+                                    <RiThumbUpFill color='red' style={{ display: 'inline-block', marginRight: '10px' }} /> {media.vote_count}
                                 </Text>
                                 <Text alignSelf='center' background='white' p='2px' borderRadius='full'></Text>
                                 <Text>
-                                    English
+                                    {media.original_language}
                                 </Text>
                             </HStack>
                             <Text mt='6'>
                                 {media.overview}
                             </Text>
 
-                            <Link href={`https://www.youtube.com`} isExternal _hover={{ textDecoration: 'none' }}>
+                            <Link href={`https://www.youtube.com/results?search_query=${media.name}`} isExternal _hover={{ textDecoration: 'none' }}>
                                 <Button colorScheme='red' mt='6'>
                                     <AiFillYoutube color='white' fontSize='2rem' style={{ marginRight: '10px' }} />Watch Trailer
                                 </Button>
                             </Link>
                         </Box>
                         <Box alignSelf='center'>
-                            <Image src={poster_carousel + 'iRV0IB5xQeOymuGGUBarTecQVAl.jpg'} alt='Poster image' borderRadius='lg' />
+                            <Image src={poster_carousel + `${media.poster_path}`} alt='Poster image' borderRadius='lg' />
                         </Box>
                     </Flex>
                 </Box>

@@ -21,7 +21,11 @@ export default function MovieCard({ movie, movieOnOpen, setCurrentMovie, fetchMo
             release = Math.round(value/365) + ' years ago';
         }
         else if(value > 31) {
-            release = Math.round(value/30) + ' months ago';
+            if(Math.round(value/30) === 1){
+                release = Math.round(value/30) + ' month ago';
+            } else {
+                release = Math.round(value/30) + ' months ago';
+            }
         } else if(value > 0) {
             release = value + " days ago";
         } else {
