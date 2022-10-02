@@ -32,7 +32,8 @@ import {
     Tab,
     TabPanel,
     Input,
-    IconButton
+    IconButton,
+    Progress
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { backdrop_url, img_unavailable, poster_url_300 } from '../Utils';
@@ -150,20 +151,21 @@ export default function Search() {
                 p={isLessThan490 ? 5 : 8}
                 display='inline-block'
                 width='100%'
+                minHeight='100vh'
             >
                 <form onSubmit={onSearch}>
-                    <Flex gap='2'>
-                        <Input placeholder='Search Keywords' name='search_media' onChange={(e) => setSearchText(e.target.value)} />
+                    <Flex gap='2' maxWidth='600px' m='auto'>
+                        <Input placeholder='Search Keywords' name='search_media' onChange={(e) => setSearchText(e.target.value)} backgroundColor='white' color='black' />
                         <IconButton
                             type='submit'
-                            colorScheme='green'
-                            bg='#38B2AC'
+                            colorScheme='red'
+                            // bg='#E53E3E'
                             aria-label='Search database'
                             icon={<SearchIcon />}
                         />
                     </Flex>
                 </form>
-                <Tabs mt='5'>
+                <Tabs mt='5' borderColor='#080808'>
                     <TabList>
                         <Tab onClick={() => {
                             setType('movie');
@@ -172,7 +174,9 @@ export default function Search() {
                                 setMediaList([]);
                                 fetchMedia('movie');
                             } //fetchMedia function is executed again as the tab changed
-                        }}>Movies</Tab>
+                        }} _selected={{ color: '#E87B60', fontWeight: 'bold' }} _focus={{ backgroundColor: '#080808' }} >
+                            Movies
+                        </Tab>
                         <Tab onClick={() => {
                             setType('tv');
                             if(type !== "tv"){
@@ -180,20 +184,13 @@ export default function Search() {
                                 setMediaList([]);
                                 fetchMedia('tv');
                             } //fetchMedia function is executed again as the tab changed
-                        }}>Tv Shows</Tab>
+                        }} _selected={{ color: '#E87B60', fontWeight: 'bold' }} _focus={{ backgroundColor: '#080808' }} >Tv Shows</Tab>
                     </TabList>
 
                     <TabPanels>
-                        {isLoading && <Spinner
-                            thickness='4px'
-                            speed='0.65s'
-                            emptyColor='gray.200'
-                            color='#38B2AC'
-                            size='xl'
-                            mt={3}
-                        />}
+                        {isLoading && <Progress size='xs' my='6' backgroundColor='#080808' isIndeterminate colorScheme='#E53E3E' />}
                         {!isLoading && <TabPanel>
-                            <Text fontSize={28} textAlign='left' mt={2} borderLeft='10px solid red' paddingLeft='10px'>Movies</Text>
+                            <Text fontSize={28} textAlign='left' mt={2} borderLeft='10px solid #E53E3E' paddingLeft='10px' my='6'>Movies</Text>
 
                             <Box
                                 className='tending-movies-container'
@@ -207,7 +204,7 @@ export default function Search() {
                             </Box>
                         </TabPanel>}
                         {!isLoading && <TabPanel>
-                            <Text fontSize={28} textAlign='left' mt={2} borderLeft='10px solid red' paddingLeft='10px'>Tv Shows</Text>
+                            <Text fontSize={28} textAlign='left' mt={2} borderLeft='10px solid #E53E3E' paddingLeft='10px' my='6'>Tv Shows</Text>
 
                             <Box
                                 className='tending-movies-container'
@@ -223,13 +220,15 @@ export default function Search() {
                     </TabPanels>
                 </Tabs>
 
+                <center>
                 {loading && <Spinner
                     thickness='4px'
                     speed='0.65s'
                     emptyColor='gray.200'
-                    color='#38B2AC'
+                    color='#E53E3E'
                     size='xl'
                 />}
+                </center>
                 {error && <p>Error!</p>}
                 <div ref={loader} />
 

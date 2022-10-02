@@ -138,7 +138,7 @@ export default function Movies() {
         thickness='4px'
         speed='0.65s'
         emptyColor='gray.200'
-        color='#38B2AC'
+        color='#E53E3E'
         size='xl'
     />
 
@@ -149,20 +149,21 @@ export default function Movies() {
                 className='movie-box'
                 p={isLessThan490 ? 5 : 8}
                 display='inline-block'
+                minHeight='100vh'
             >
                 <Text fontSize={28} textAlign='left' borderLeft='10px solid red' paddingLeft='10px'>Movies</Text>
 
-                <Wrap spacing={4} mt='4'>
+                <Wrap spacing={4} my='10'>
                     {
                         selectedGenres.map((g) => <WrapItem>
-                            <Button colorScheme='red' onClick={() => removeGenre(g)} position='relative' fontWeight='normal'>
+                            <Button colorScheme='#E53E3E' onClick={() => removeGenre(g)} position='relative' fontWeight='normal'>
                                 {g.name}
                             </Button>
                         </WrapItem>)
                     }
                     {
                         genereList.map((g) => <WrapItem>
-                            <Button colorScheme='red' border='0.6px solid red' background='transparent' onClick={() => addGenre(g)} fontWeight='normal'>{g.name}</Button>
+                            <Button colorScheme='#E53E3E' border='0.6px solid #E53E3E' background='transparent' onClick={() => addGenre(g)} fontWeight='normal'>{g.name}</Button>
                         </WrapItem>)
                     }
                 </Wrap>
@@ -178,13 +179,15 @@ export default function Movies() {
                     </SimpleGrid>
                 </Box>
 
+                <center>
                 {loading && <Spinner
                     thickness='4px'
                     speed='0.65s'
                     emptyColor='gray.200'
-                    color='#38B2AC'
+                    color='#E53E3E'
                     size='xl'
                 />}
+                </center>
                 {error && <p>Error!</p>}
                 <div ref={loader} />
 
@@ -203,7 +206,7 @@ export default function Movies() {
                             thickness='4px'
                             speed='0.65s'
                             emptyColor='gray.200'
-                            color='#38B2AC'
+                            color='#E53E3E'
                             size='xl'
                         />}
                             {!fetchMovieLoading && <Flex

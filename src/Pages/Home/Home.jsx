@@ -102,7 +102,7 @@ export default function Home() {
         thickness='4px'
         speed='0.65s'
         emptyColor='gray.200'
-        color='#38B2AC'
+        color='#E53E3E'
         size='xl'
     />
 
@@ -114,8 +114,9 @@ export default function Home() {
                 className='trending-box'
                 p={isLessThan490 ? 5 : 8}
                 display='inline-block'
+                minHeight='100vh'
             >
-                <Text fontSize={28} textAlign='left' borderLeft='10px solid red' paddingLeft='10px'>Trending Today</Text>
+                <Text fontSize={28} textAlign='left' borderLeft='10px solid #E53E3E' paddingLeft='10px'>Trending Today</Text>
 
                 <Box
                     className='tending-movies-container'
@@ -128,13 +129,15 @@ export default function Home() {
                     </SimpleGrid>
                 </Box>
 
+                <center>
                 {loading && <Spinner
                     thickness='4px'
                     speed='0.65s'
                     emptyColor='gray.200'
-                    color='#38B2AC'
+                    color='#E53E3E'
                     size='xl'
                 />}
+                </center>
                 {error && <p>Error!</p>}
                 <div ref={loader} />
 
@@ -153,7 +156,7 @@ export default function Home() {
                             thickness='4px'
                             speed='0.65s'
                             emptyColor='gray.200'
-                            color='#38B2AC'
+                            color='#E53E3E'
                             size='xl'
                         />}
                             {!fetchMovieLoading && <Flex

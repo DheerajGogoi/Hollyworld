@@ -27,7 +27,6 @@ export default function Header() {
     const [isLessThan730] = useMediaQuery('(max-width: 730px)')
     return (
         <Box
-            bg='#38B2AC'
             w='100%'
             p={4}
             textAlign='center'
@@ -47,16 +46,16 @@ export default function Header() {
                 {isLessThan730 && <MenuDropDown />}
 
                 {!isLessThan730 && <HStack gap='4' mr='4'>
-                    <Text cursor='pointer' fontWeight={location.pathname === '/' ? 'bold' : 'normal'} onClick={() => navigate('/')}>
+                    <Text cursor='pointer' fontWeight={location.pathname === '/' ? 'bold' : 'normal'} _hover={{ color: '#FF3F3F' }} transition='0.3s ease' onClick={() => navigate('/')}>
                         Home
                     </Text>
-                    <Text cursor='pointer' fontWeight={location.pathname === '/movies' ? 'bold' : 'normal'} onClick={() => navigate('/movies')}>
+                    <Text cursor='pointer' fontWeight={location.pathname === '/movies' ? 'bold' : 'normal'} _hover={{ color: '#FF3F3F' }} transition='0.3s ease' onClick={() => navigate('/movies')}>
                         Movies
                     </Text>
-                    <Text cursor='pointer' fontWeight={location.pathname === '/tvshows' ? 'bold' : 'normal'} onClick={() => navigate('/tvshows')}>
+                    <Text cursor='pointer' fontWeight={location.pathname === '/tvshows' ? 'bold' : 'normal'} _hover={{ color: '#FF3F3F' }} transition='0.3s ease' onClick={() => navigate('/tvshows')}>
                         TV Shows
                     </Text>
-                    <Text cursor='pointer' fontWeight={location.pathname === '/search' ? 'bold' : 'normal'} onClick={() => navigate('/search')}>
+                    <Text cursor='pointer' fontWeight={location.pathname === '/search' ? 'bold' : 'normal'} _hover={{ color: '#FF3F3F' }} transition='0.3s ease' onClick={() => navigate('/search')}>
                         Search
                     </Text>
                 </HStack>}

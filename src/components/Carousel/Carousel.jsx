@@ -1,5 +1,5 @@
 import './Carousel.scss';
-import { Box, Button, Flex, HStack, Image, Text, Link } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Image, Text, Link, Spinner } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
 import { StarIcon } from '@chakra-ui/icons';
 import { poster_carousel } from '../../Utils';
@@ -51,7 +51,7 @@ export default function Carousel() {
         fetchData();
     }, [])
 
-    if(loading) return <h1>Loading....</h1>
+    if(loading) return "";
 
     return (
         <Box>
