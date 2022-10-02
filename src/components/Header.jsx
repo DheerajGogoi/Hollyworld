@@ -39,7 +39,7 @@ export default function Header() {
                 gap='2'
             >
                 <IconButton aria-label='Search database' icon={<FaPlayCircle style={{ fontSize: '1.5rem', color: 'white' }} />} borderRadius='full' background='transparent' _hover={{ background: 'transparent' }} alignSelf='center' />
-                <Text fontSize={26} fontWeight={500} color='white' alignSelf='center'>MOVIELUX</Text>
+                <Text fontSize={26} fontWeight={500} color='white' alignSelf='center'>HOLLYWORLD</Text>
 
                 <Spacer />
                 
