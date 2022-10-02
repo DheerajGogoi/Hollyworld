@@ -193,7 +193,7 @@ export default function Search() {
                             mt={3}
                         />}
                         {!isLoading && <TabPanel>
-                            <Text fontSize={28} textAlign='left' mt={2}>Movies</Text>
+                            <Text fontSize={28} textAlign='left' mt={2} borderLeft='10px solid red' paddingLeft='10px'>Movies</Text>
 
                             <Box
                                 className='tending-movies-container'
@@ -207,7 +207,7 @@ export default function Search() {
                             </Box>
                         </TabPanel>}
                         {!isLoading && <TabPanel>
-                            <Text fontSize={28} textAlign='left' mt={2}>Tv Shows</Text>
+                            <Text fontSize={28} textAlign='left' mt={2} borderLeft='10px solid red' paddingLeft='10px'>Tv Shows</Text>
 
                             <Box
                                 className='tending-movies-container'

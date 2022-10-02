@@ -36,6 +36,7 @@ import useFetchTrending from '../../hooks/useFetchTrending';
 import { backdrop_url, poster_url_300 } from '../../Utils';
 import { AiFillYoutube } from "react-icons/ai";
 import { FaPlayCircle } from "react-icons/fa";
+import Carousel from '../../components/Carousel/Carousel';
 
 export default function Home() {
     const { isOpen: movieIsOpen, onOpen: movieOnOpen, onClose: movieOnClose } = useDisclosure()
@@ -48,6 +49,7 @@ export default function Home() {
     const [isLessThan490] = useMediaQuery('(max-width: 490px)');
     const [isLessThan550] = useMediaQuery('(max-width: 550px)');
     const [isLessThan850] = useMediaQuery('(max-width: 850px)');
+    const [isLessThan935] = useMediaQuery('(max-width: 935px)');
 
     const { loading, error, list } = useFetchTrending(page);
     const loader = useRef(null);
@@ -107,12 +109,13 @@ export default function Home() {
     return (
         <Box textAlign='center' overflowX='hidden' background='#080808' color='white'>
             <Header />
+            {!isLessThan935 && <Carousel />}
             <Box
                 className='trending-box'
                 p={isLessThan490 ? 5 : 8}
                 display='inline-block'
             >
-                <Text fontSize={28} textAlign='left'>Trending Today</Text>
+                <Text fontSize={28} textAlign='left' borderLeft='10px solid red' paddingLeft='10px'>Trending Today</Text>
 
                 <Box
                     className='tending-movies-container'

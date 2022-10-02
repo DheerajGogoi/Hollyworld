@@ -150,9 +150,9 @@ export default function TvShows() {
                 p={isLessThan490 ? 5 : 8}
                 display='inline-block'
             >
-                <Text fontSize={28} textAlign='left'>Tv Shows</Text>
+                <Text fontSize={28} textAlign='left' borderLeft='10px solid red' paddingLeft='10px'>Tv Shows</Text>
 
-                <Wrap spacing={4}>
+                <Wrap spacing={4} mt='4'>
                     {
                         selectedGenres.map((g) => <WrapItem>
                             <Button colorScheme='red' onClick={() => removeGenre(g)} position='relative' fontWeight='normal'>
